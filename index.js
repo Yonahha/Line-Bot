@@ -85,6 +85,9 @@ function sendText (sender, text) {
 }
 */
 app.post('/webhook', (req, res) => {
+  var text = req.body.events[0].message.text;
+  var sender = req.body.events[0].source.userId;
+
     async.waterfall([
             function(callback) {
             	request({url: 'http://api.wunderground.com/api/e1cb835416fecd99/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
@@ -93,7 +96,7 @@ app.post('/webhook', (req, res) => {
 					}
           var obj = json['current_observation'];
           var obj1 = obj["display_location"];
-					callback(JSON.stringify(obj1["state_name"]));
+					callback(JSON.stringify(obj1["full"]));
 				});
 			},
 		],
@@ -105,9 +108,12 @@ app.post('/webhook', (req, res) => {
         	var data = {
        		to: req.body.events[0].source.userId,
             messages: [{
-             	type: 'text',
-               text: jsonData
-            }]
+             	          type: 'text',
+                        text: jsonData
+                      },{
+                        type: 'text',
+                        text jsonData
+                      }]
          };
         	var options = {
        		url: 'https://api.line.me/v2/bot/message/push',
