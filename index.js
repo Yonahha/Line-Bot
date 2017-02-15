@@ -59,7 +59,7 @@ app.post('/webhook', (req, res) => {
 });
 */
 
-app.post('/webhook', (req, res) {
+app.post('/webhook', (req, res) => {
     async.waterfall([
             function(callback) {
                 request({url: 'http://api.wunderground.com/api/e1cb835416fecd99/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
