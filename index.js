@@ -91,16 +91,12 @@ app.post('/webhook', (req, res) => {
     async.waterfall([
             function(callback) {
             	request({url: 'http://api.wunderground.com/api/e1cb835416fecd99/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
-					if (err) {
-						throw err;
-					}
-
-          var obj = json['current_observation'];
-          //callback(JSON.stringify(obj.display_location.full));
-          callback(obj.display_location);
-
-				});
-			},
+    					if (err) {throw err;}
+              var obj = json['current_observation'];
+              //callback(JSON.stringify(obj.display_location.full));
+              callback(obj.display_location);
+    				  });
+			     },
 		],
       function(jsonData) {
       	var headers = {
@@ -111,10 +107,19 @@ app.post('/webhook', (req, res) => {
        		to: req.body.events[0].source.userId,
             messages: [{
              	          type: 'text',
-                        text: JSON.stringify(jsonData.full)
+                        text: "City: "+ JSON.stringify(jsonData.city)
                       },{
                         type: 'text',
-                        text: JSON.stringify(jsonData.full)
+                        text: "Time: "+JSON.stringify(jsonData.local_time_rfc822)
+                      },{
+                        type: 'text',
+                        text: "Temperature: "+JSON.stringify(jsonData.temperature_string)
+                      },{
+                        type: 'text',
+                        text: "Weather: "+JSON.stringify(jsonData.weather)
+                      },{
+                        type: 'text',
+                        text: "Humidity: "+JSON.stringify(jsonData.relative_humidity)
                       }]
          };
         	var options = {
