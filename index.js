@@ -91,7 +91,10 @@ app.post('/webhook', (req, res) => {
 					if (err) {
 						throw err;
 					}
-					callback(JSON.stringify(json));
+          var obj = json['current_observation'];
+          var obj1 = obj["display_location"];
+          //    return obj1["state_name"];
+					callback(JSON.stringify(obj1));
 				});
 			},
 		],
