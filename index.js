@@ -107,19 +107,11 @@ app.post('/webhook', (req, res) => {
        		to: req.body.events[0].source.userId,
             messages: [{
              	          type: 'text',
-                        text: "City: "+ JSON.stringify(jsonData.city)
-                      },{
-                        type: 'text',
-                        text: "Time: "+JSON.stringify(jsonData.local_time_rfc822)
-                      },{
-                        type: 'text',
-                        text: "Temperature: "+JSON.stringify(jsonData.temperature_string)
-                      },{
-                        type: 'text',
-                        text: "Weather: "+JSON.stringify(jsonData.weather)
-                      },{
-                        type: 'text',
-                        text: "Humidity: "+JSON.stringify(jsonData.relative_humidity)
+                        text: "City: "+ JSON.stringify(jsonData.city) +
+                              "\nTime: "+jsonData.local_time_rfc822 +
+                              "\nTemperature: "+jsonData.temperature_string +
+                              "\nWeather: "+jsonData.weather +
+                              "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       }]
          };
         	var options = {
