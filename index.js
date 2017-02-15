@@ -32,7 +32,7 @@ app.get('/weather', function(req, response){
     response.send(obj1["state_name"]);
   })
 });
-*/
+
 
 function getWeather(){
   request({url: 'http://api.wunderground.com/api/ff6d8d1f8d1c171e/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
@@ -46,7 +46,7 @@ function getWeather(){
   });
 }
 
-/*
+
 app.post('/webhook', (req, res) => {
   var text = req.body.events[0].message.text
   var sender = req.body.events[0].source.userId
@@ -57,48 +57,73 @@ app.post('/webhook', (req, res) => {
   sendText(sender, text);
   res.sendStatus(200);
 });
-*/
 
+function sendText (sender, text) {
+  let data = {
+    to: sender,
+    messages: [
+      {
+        type: 'text',
+        text: ' หรรม ' +
+      }
+    ]
+  }
+  request({
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer {YV4YHUNnJhTURSd9BzLGokn7ALa8+pKl/KooSoAEW7CL4yNF9TwjC3Jw5TuivsoQ3VwhB87kTwCamwcHFHj0Qv6XGMZKbJYXziekYqmHFnBj9AvZpxya3rRNupun8JIFv5EzUZUPlfZcywrvH9jhgQdB04t89/1O/w1cDnyilFU=}'
+    },
+    url: 'https://api.line.me/v2/bot/message/push',
+    method: 'POST',
+    body: data,
+    json: true
+  }, function (err, res, body) {
+    if (err) console.log('error')
+    if (res) console.log('success')
+    if (body) console.log(body)
+  })
+}
+*/
 app.post('/webhook', (req, res) => {
     async.waterfall([
             function(callback) {
-                request({url: 'http://api.wunderground.com/api/e1cb835416fecd99/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
+            	request({url: 'http://api.wunderground.com/api/e1cb835416fecd99/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
 					if (err) {
 						throw err;
 					}
-					callback(json);
-				})
-            },
-        ],
-        function(jsonData) {
-            var headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer {YV4YHUNnJhTURSd9BzLGokn7ALa8+pKl/KooSoAEW7CL4yNF9TwjC3Jw5TuivsoQ3VwhB87kTwCamwcHFHj0Qv6XGMZKbJYXziekYqmHFnBj9AvZpxya3rRNupun8JIFv5EzUZUPlfZcywrvH9jhgQdB04t89/1O/w1cDnyilFU=}'
-            };
-            var data = {
-                'replyToken': req.body['events'][0]['replyToken'],
-                "messages": [{
-                    "type": "text",
-                    "text": jsonData
-                }]
-            };
-            var options = {
-                url: 'https://api.line.me/v2/bot/message/reply',
-                proxy: process.env.FIXIE_URL,
-                headers: headers,
-                json: true,
-                body: data
-            };
+					callback(JSON.stringify(json));
+				});
+			},
+		],
+      function(jsonData) {
+      	var headers = {
+         	'Content-Type': 'application/json',
+           	'Authorization': 'Bearer {YV4YHUNnJhTURSd9BzLGokn7ALa8+pKl/KooSoAEW7CL4yNF9TwjC3Jw5TuivsoQ3VwhB87kTwCamwcHFHj0Qv6XGMZKbJYXziekYqmHFnBj9AvZpxya3rRNupun8JIFv5EzUZUPlfZcywrvH9jhgQdB04t89/1O/w1cDnyilFU=}'
+       	};
+        	var data = {
+       		to: req.body.events[0].source.userId,
+            messages: [{
+             	type: 'text',
+               text: jsonData
+            }]
+         };
+        	var options = {
+       		url: 'https://api.line.me/v2/bot/message/push',
+           	method: 'POST',
+        		headers: headers,
+           	json: true,
+            body: data
+        	};
 
-            request.post(options, function(error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    console.log(body);
-                } else {
-                    console.log('error: ' + JSON.stringify(response));
-                }
-            });
-        }
-    );
+         request.post(options, function(error, response, body) {
+           	if (!error && response.statusCode == 200) {
+     		      console.log(body);
+        		} else {
+       		    console.log('error: ' + JSON.stringify(response));
+           	}
+   		});
+    	}
+	);
 });
 
 app.listen(app.get('port'), function() {
