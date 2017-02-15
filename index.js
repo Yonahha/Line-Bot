@@ -96,10 +96,8 @@ app.post('/webhook', (req, res) => {
 					}
 
           var obj = json['current_observation'];
-          /*
-          var obj1 = obj["display_location"];
-					callback(JSON.stringify(obj1["full"]));*/
-          callback(JSON.stringify(obj.display_location));
+          //callback(JSON.stringify(obj.display_location.full));
+          callback(obj.display_location);
 
 				});
 			},
@@ -113,10 +111,10 @@ app.post('/webhook', (req, res) => {
        		to: req.body.events[0].source.userId,
             messages: [{
              	          type: 'text',
-                        text: jsonData.full
+                        text: JSON.stringify(jsonData.full)
                       },{
                         type: 'text',
-                        text: jsonData.full
+                        text: JSON.stringify(jsonData.full)
                       }]
          };
         	var options = {
