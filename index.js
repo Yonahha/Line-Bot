@@ -112,7 +112,7 @@ app.post('/webhook', (req, res) => {
                         text: jsonData
                       },{
                         type: 'text',
-                        text jsonData
+                        text: jsonData
                       }]
          };
         	var options = {
