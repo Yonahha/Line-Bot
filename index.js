@@ -20,70 +20,7 @@ app.set('view engine', 'ejs');
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
-/*
-app.get('/weather', function(req, response){
-  request({url: 'http://api.wunderground.com/api/ff6d8d1f8d1c171e/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
-    if (err) {
-      throw err;
-    }
-    var obj = json['current_observation'];
-    var obj1 = obj["display_location"];
 
-    response.send(obj1["state_name"]);
-  })
-});
-
-
-function getWeather(){
-  request({url: 'http://api.wunderground.com/api/ff6d8d1f8d1c171e/conditions/q/TH/Ubon_Ratchathani.json', json:true}, function(err, res, json){
-    if (err) {
-      throw err;
-    }
-//    var obj = json['current_observation'];
-//    var obj1 = obj["display_location"];
-//    return obj1["state_name"];
-      return json;
-  });
-}
-
-
-app.post('/webhook', (req, res) => {
-  var text = req.body.events[0].message.text
-  var sender = req.body.events[0].source.userId
-  var replyToken = req.body.events[0].replyToken
-  //console.log(text, sender, replyToken);
-  //console.log(typeof sender, typeof text);
-  // console.log(req.body.events[0])
-  sendText(sender, text);
-  res.sendStatus(200);
-});
-
-function sendText (sender, text) {
-  let data = {
-    to: sender,
-    messages: [
-      {
-        type: 'text',
-        text: ' หรรม ' +
-      }
-    ]
-  }
-  request({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer {YV4YHUNnJhTURSd9BzLGokn7ALa8+pKl/KooSoAEW7CL4yNF9TwjC3Jw5TuivsoQ3VwhB87kTwCamwcHFHj0Qv6XGMZKbJYXziekYqmHFnBj9AvZpxya3rRNupun8JIFv5EzUZUPlfZcywrvH9jhgQdB04t89/1O/w1cDnyilFU=}'
-    },
-    url: 'https://api.line.me/v2/bot/message/push',
-    method: 'POST',
-    body: data,
-    json: true
-  }, function (err, res, body) {
-    if (err) console.log('error')
-    if (res) console.log('success')
-    if (body) console.log(body)
-  })
-}
-*/
 
 app.get('/image', function(request, response) {
   response.render(request);
@@ -119,8 +56,8 @@ app.post('/webhook', (req, res) => {
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       },{
                         type: "image",
-                        originalContentUrl: "http://icons.wxug.com/graphics/wu2/logo_130x80.png",
-                        previewImageUrl: "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+                        originalContentUrl: "https://secret-hamlet-57052.herokuapp.com/image/LINE_logo.png",
+                        previewImageUrl: "https://secret-hamlet-57052.herokuapp.com/image/LINE_logo.png"
                       }]
          };
         	var options = {
