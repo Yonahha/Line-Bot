@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/image'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -22,12 +21,8 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/db', function (request, response) {
-     response.render('pages/db', {tmpdata: "LINE_logo.png"});
-});
-
-app.get('/image', function(request, response) {
-  response.render(request);
+app.get('/images', function(request, response){
+	respense.render(request);
 });
 
 app.post('/webhook', (req, res) => {
@@ -60,8 +55,8 @@ app.post('/webhook', (req, res) => {
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       },{
                         type: "image",
-                        originalContentUrl: "https://secret-hamlet-57052.herokuapp.co/image/LINE_logo.png",
-                        previewImageUrl: "https://secret-hamlet-57052.herokuapp.com/image/LINE_logo.png"
+                        originalContentUrl: "https://secret-hamlet-57052.herokuapp.co/images/LINE_logo.png",
+                        previewImageUrl: "https://secret-hamlet-57052.herokuapp.com/images/LINE_logo.png"
                       }]
          };
         	var options = {
