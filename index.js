@@ -22,11 +22,11 @@ app.get('/', function(request, response) {
 });
 
 app.get('/db', function (request, response) {
-     response.render('pages/db');
+     response.render('pages/db', {tmpdata: "LINE_logo.png"});
 });
 
-app.get('/image/*', function(request, response) {
-  response.render('pages/db', {tmpdata: "LINE_logo.png"});
+app.get('/image', function(request, response) {
+  response.render(request);
 });
 
 app.post('/webhook', (req, res) => {
