@@ -112,6 +112,11 @@ app.post('/webhook', (req, res) => {
                               "\nTemperature: "+ JSON.stringify(jsonData.temperature_string) +
                               "\nWeather: "+JSON.stringify(jsonData.weather) +
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
+                      },{
+                        //http://icons.wxug.com/graphics/wu2/logo_130x80.png
+                        type: "image",
+                        originalContentUrl: "http://icons.wxug.com/graphics/wu2/logo_130x80.png",
+                        previewImageUrl: "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
                       }]
          };
         	var options = {
