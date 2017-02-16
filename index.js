@@ -56,7 +56,7 @@ app.post('/webhook', (req, res) => {
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       },{
                         type: "image",
-                        originalContentUrl: "https://secret-hamlet-57052.herokuapp.com/image/LINE_logo.png",
+                        originalContentUrl: "../image/LINE_logo.png",
                         previewImageUrl: "https://secret-hamlet-57052.herokuapp.com/image/LINE_logo.png"
                       }]
          };
