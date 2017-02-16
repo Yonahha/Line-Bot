@@ -21,6 +21,9 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+app.get('/db', function (request, response) {
+     response.render('pages/db');
+});
 
 app.get('/image', function(request, response) {
   response.render(request);
@@ -56,7 +59,7 @@ app.post('/webhook', (req, res) => {
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       },{
                         type: "image",
-                        originalContentUrl: "../image/LINE_logo.png",
+                        originalContentUrl: "https://secret-hamlet-57052.herokuapp.co/image/LINE_logo.png",
                         previewImageUrl: "https://secret-hamlet-57052.herokuapp.com/image/LINE_logo.png"
                       }]
          };
