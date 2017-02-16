@@ -84,6 +84,11 @@ function sendText (sender, text) {
   })
 }
 */
+
+app.get('/image', function(request, response) {
+  response.render(request);
+});
+
 app.post('/webhook', (req, res) => {
   var text = req.body.events[0].message.text;
   var sender = req.body.events[0].source.userId;
@@ -113,7 +118,6 @@ app.post('/webhook', (req, res) => {
                               "\nWeather: "+JSON.stringify(jsonData.weather) +
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       },{
-                        //http://icons.wxug.com/graphics/wu2/logo_130x80.png
                         type: "image",
                         originalContentUrl: "http://icons.wxug.com/graphics/wu2/logo_130x80.png",
                         previewImageUrl: "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
