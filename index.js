@@ -94,7 +94,7 @@ app.post('/webhook', (req, res) => {
     					if (err) {throw err;}
               var obj = json['current_observation'];
               //callback(JSON.stringify(obj.display_location.full));
-              callback(obj.display_location);
+              callback(obj);
     				  });
 			     },
 		],
@@ -107,10 +107,10 @@ app.post('/webhook', (req, res) => {
        		to: req.body.events[0].source.userId,
             messages: [{
              	          type: 'text',
-                        text: "City: "+ JSON.stringify(jsonData.local_time_rfc822) +
-                              "\nTime: "+jsonData.local_time_rfc822 +
-                              "\nTemperature: "+jsonData.temperature_string +
-                              "\nWeather: "+jsonData.weather +
+                        text: "City: "+ JSON.stringify(jsonData.display_location.full) +
+                              "\nTime: "+JSON.stringify(jsonData.local_time_rfc822) +
+                              "\nTemperature: "+ JSON.stringify(jsonData.temperature_string) +
+                              "\nWeather: "+JSON.stringify(jsonData.weather) +
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       }]
          };
