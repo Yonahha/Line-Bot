@@ -107,7 +107,7 @@ app.post('/webhook', (req, res) => {
        		to: req.body.events[0].source.userId,
             messages: [{
              	          type: 'text',
-                        text: "City: "+ JSON.stringify(jsonData.city) +
+                        text: "City: "+ JSON.stringify(jsonData.local_time_rfc822) +
                               "\nTime: "+jsonData.local_time_rfc822 +
                               "\nTemperature: "+jsonData.temperature_string +
                               "\nWeather: "+jsonData.weather +
