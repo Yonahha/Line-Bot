@@ -26,7 +26,7 @@ app.get('/db', function (request, response) {
 });
 
 app.get('/image/*', function(request, response) {
-  response.render(*);
+  response.render(request);
 });
 
 app.post('/webhook', (req, res) => {
