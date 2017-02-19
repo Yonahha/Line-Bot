@@ -55,8 +55,8 @@ app.post('/webhook', (req, res) => {
                               "\nHumidity: "+JSON.stringify(jsonData.relative_humidity)
                       },{
                         type: "image",
-                        originalContentUrl: "https://firebasestorage.googleapis.com/v0/b/line-bot-5924c.appspot.com/o/por.jpg",
-                        previewImageUrl: "https://firebasestorage.googleapis.com/v0/b/line-bot-5924c.appspot.com/o/por.jpg"
+                        originalContentUrl: "https://firebasestorage.googleapis.com/v0/b/line-bot-5924c.appspot.com/o/por.jpg?alt=media&token=7a8c1bd2-5af5-4f15-9117-06f96b8a06da",
+                        previewImageUrl: "https://firebasestorage.googleapis.com/v0/b/line-bot-5924c.appspot.com/o/por.jpg?alt=media&token=7a8c1bd2-5af5-4f15-9117-06f96b8a06da"
                       }]
          };
         	var options = {
